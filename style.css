@@ -1,0 +1,106 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+}
+h1 {
+  font-size: 3rem;
+  margin: 0 0 1rem;
+}
+.buttons {
+  position: relative;
+  width: 360px;
+  height: 140px;
+}
+button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: left .22s cubic-bezier(.2,.9,.2,1), top .22s cubic-bezier(.2,.9,.2,1);
+}
+#no {
+  position: absolute;
+  left: 260px;
+  top: 40px;
+  background: #e74c3c;
+  color: white;
+}
+#yes {
+  position: absolute;
+  left: 60px;
+  top: 40px;
+  background: #27ae60;
+  color: white;
+}
+.hidden { display: none; }
+.hidden { display: none; }
+#result { margin-top: 1rem; font-size: 1.2rem; color: #333; }
+
+.heart {
+  /* Place the heart above the heading and make it larger */
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: translateY(-12px);
+  font-size: 3.8rem;
+  margin-bottom: -8px;
+  z-index: 2;
+  transition: transform .34s cubic-bezier(.2,.9,.2,1);
+}
+
+.heart.enlarge {
+  transform: translateY(-18px) scale(1.18);
+}
+
+/* Hearts pop animation (Evet sonrası) */
+.pop-heart {
+  position: absolute;
+  pointer-events: none;
+  font-size: 2rem;
+  will-change: transform, opacity, left, top;
+  transform-origin: center;
+  display: inline-block;
+  opacity: 1;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+  animation-name: explode;
+  animation-timing-function: cubic-bezier(.18,.84,.3,1);
+}
+
+/* explode: from center -> outward using CSS variables for translation */
+@keyframes explode {
+  0% {
+    transform: translate(0,0) scale(0.9) rotate(var(--rot, 0deg));
+    opacity: 1;
+  }
+  55% {
+    transform: translate(calc(var(--tx) * 0.6), calc(var(--ty) * 0.6)) scale(1.08) rotate(calc(var(--rot, 0deg) + 8deg));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1.25) rotate(calc(var(--rot, 0deg) + 28deg));
+    opacity: 0;
+  }
+}
+
+/* result highlight when showing */
+.result-show {
+  animation: resultPop .48s cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes resultPop {
+  0% { transform: scale(.9); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
